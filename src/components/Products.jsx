@@ -1,9 +1,4 @@
-import React, {
-  useState,
-  useMemo,
-  useRef,
-  useCallback,
-} from 'react';
+import React, { useState, useMemo, useRef, useCallback } from 'react';
 import Product from './Product';
 import Search from './Search';
 import '../styles/components/Products.scss';
@@ -31,6 +26,12 @@ export default function Products({ products }) {
         handleSearch={handleSearch}
         searchInput={searchInput}
       />
+      {products && search.length >= 12 && (
+        <center>
+          <p style={{ color: 'red', fontWeight: 'bold' }}>No hay productos</p>
+          <span>👀🛒📦</span>
+        </center>
+      )}
       <div className="Products-items">
         {filteredProducts.map((product) => (
           <Product key={product.id} product={product} />
