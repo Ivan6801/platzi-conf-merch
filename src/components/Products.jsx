@@ -7,8 +7,7 @@ import '../styles/components/Products.scss';
 export default function Products() {
   const [search, setSearch] = useState('');
   const searchInput = useRef(null);
-  const { state, addToCart } = useContext(AppContext);
-  const { products } = state;
+  const { state: { products }, addToCart } = useContext(AppContext);
 
   const handleAddToCart = product => () => {
     addToCart(product)
