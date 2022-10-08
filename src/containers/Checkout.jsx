@@ -5,15 +5,17 @@ import AppContext from '../contexts/AppContext';
 import '../styles/components/Checkout.scss';
 
 export default function Checkout() {
-  const { state: { cart }, removeFromCart } = useContext(AppContext);
+  const {
+    state: { cart },
+    removeFromCart,
+  } = useContext(AppContext);
 
   const handleRemove = (product) => () => {
     removeFromCart(product);
   };
 
   const handleSumTotal = () => {
-    const reducer = (accumulator, currentValue) =>
-      accumulator + currentValue.price;
+    const reducer = (accumulator, currentValue) => accumulator + currentValue.price;
     const sum = cart.reduce(reducer, 0);
     return sum;
   };

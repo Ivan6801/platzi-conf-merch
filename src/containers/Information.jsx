@@ -1,5 +1,5 @@
 import React, { useRef, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import AppContext from '../contexts/AppContext';
 import '../styles/components/Information.scss';
 
@@ -8,8 +8,8 @@ export default function Information() {
     state: { cart },
     addToBuyer,
   } = useContext(AppContext);
-
   const form = useRef(null);
+  const history = useHistory();
 
   const handleSubmit = () => {
     const formData = new FormData(form.current);
@@ -25,9 +25,8 @@ export default function Information() {
       phone: formData.get('phone'),
     };
     addToBuyer(buyer);
-    console.log(buyer);
+    history.push('/checkout/payment');
   };
-
 
   return (
     <div className="Information">
