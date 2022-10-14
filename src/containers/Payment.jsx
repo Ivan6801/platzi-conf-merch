@@ -9,7 +9,7 @@ export default function Payment({ history }) {
 
   const paypalOtions = {
     clientId:
-      'AXMOZeHr2blyD77lAR5r-yZhwiAtBxDbbGlZ_Wons7O-QJUt600eEBBkAX1sLBra9cG7bS7eA177LKwx',
+      'AXY2zlHGjQGXuoEctiW2_gJ_3Sk9r9voXMzfSJoK1nK_CAWLRlhu6dj12a1knmlOthOH3KanUA_r8yPa',
     intent: 'capture',
     currency: 'USD',
   };
@@ -20,15 +20,13 @@ export default function Payment({ history }) {
   };
 
   const handlePaymentSuccess = (data) => {
-    console.log(data);
     if (data.status === 'COMPLETED') {
       const newOrder = {
         buyer,
-        product: cart,
+        products: cart,
         payment: data,
       };
-      addNewOrder(newOrder);
-      history.push('/checkout/success');
+      addNewOrder(newOrder, history.push('/checkout/success'));
     }
   };
 
@@ -44,7 +42,7 @@ export default function Payment({ history }) {
       <div className="Payment-content">
         <h3>Resument del pedido:</h3>
         {cart.map((item) => (
-          <div className="Payment-item" key={item.id}>
+          <div className="Payment-item" key={item.title}>
             <div className="Payment-element">
               <h4>{item.title}</h4>
               <span>$ {item.price}</span>
@@ -56,10 +54,9 @@ export default function Payment({ history }) {
             paypalOptions={paypalOtions}
             buttonStyles={buttonStyles}
             amount={handleSumTotal()}
-            onPaymentStart={() => console.log('Start Payment')}
-            onPaymentSuccess={(data) => handlePaymentSuccess(data)}
-            onPaymentError={(error) => console.log(error)}
-            onPaymentCancel={(data) => console.log(data)}
+            onSuccess={(data) => handlePaymentSuccess(data)}
+            onError={(error) => console.log(error)}
+            onCancel={(data) => console.log(data)}
           />
         </div>
       </div>

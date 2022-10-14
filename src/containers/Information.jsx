@@ -68,6 +68,15 @@ export default function Information() {
             </div>
           </div>
         ))}
+        <hr />
+        <div>
+          {cart.length > 0 ? (
+            <h3>Lista de Pedidos: {cart.length}</h3>
+          ) : (
+            <h3>Sin pedidos...</h3>
+          )}
+        </div>
+        <hr />
       </div>
     </div>
   );
